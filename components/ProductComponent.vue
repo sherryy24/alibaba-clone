@@ -55,7 +55,7 @@ const {product} = toRefs(props)
    
 
    const priceComputed = computed(()=>{
-    return product.value.price/100
+    return (product.value.price/100).toFixed(2);
    })
 
    const oldPriceComputed = computed(() => {
