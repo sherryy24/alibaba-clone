@@ -1,7 +1,8 @@
 <template>
     <MainLayout>
         <div id="ShoppingCartPage" class="mt-4 max-w-[1200px] mx-auto px-2">
-            <div v-if="!userStore.cart.length" class="h-[500px] flex items-center justify-center">
+            <div v-if="false"
+            class="h-[500px] flex items-center justify-center">
                 <div class="pt-20">
                     <img 
                         class="mx-auto"
@@ -11,7 +12,7 @@
 
                     <div class="text-xl text-center mt-4">No items yet?</div>
 
-                    <div v-if="!user" class="flex text-center">
+                    <div v-if="true" class="flex text-center">
                         <NuxtLink 
                             to="/auth"
                             class="
@@ -36,7 +37,7 @@
                     <div class="bg-white rounded-lg p-4">
 
                         <div class="text-2xl font-bold mb-2">
-                            Shopping Cart ({{ userStore.cart.length }})
+                            Shopping Cart (0)
                         </div>
 
                     </div>
@@ -46,7 +47,7 @@
                     </div>
 
                     <div id="Items" class="bg-white rounded-lg p-4 mt-4">
-                        <div v-for="product in userStore.cart">
+                        <div v-for="product in products" :key="product">
                             <CartItem 
                                 :product="product" 
                                 :selectedArray="selectedArray"
@@ -90,7 +91,7 @@
 
                         <div class="text-lg font-semibold mb-2">Payment methods</div>
                         <div class="flex items-center justify-start gap-8 my-4">
-                            <div v-for="card in cards">
+                            <div v-for="card in cards" :key="card">
                                 <img class="h-6" :src="card">
                             </div>
                         </div>
@@ -111,5 +112,50 @@
 
 <script setup>
 import MainLayout from '~/layouts/MainLayout.vue';
+import { useUserStore } from '~/stores/user'
+
+const userStore = useUserStore();
+
+let selectedArray = ref([])
+
+
+const cards = ref([
+    'visa.png',
+    'mastercard.png',
+    'paypal.png',
+    'applepay.png',
+
+])
+
+
+onMounted(()=>{
+    setTimeout(()=> userStore.isLoading = false, 200)
+})
+const products = [
+    {
+        "id": 1,
+        "name": "Product 1",
+        "title": "title1",
+        "price": 10.99,
+        "description": "This is the description of Product 1.",
+        "url": "https://picsum.photos/200/200"
+    },
+    {
+        "id": 2,
+        "name": "Product 2",
+        "title": "title2",
+        "price": 11.99,
+        "description": "This is the description of Product 2.",
+        "url": "https://picsum.photos/200/200"
+    },
+    {
+        "id": 3,
+        "name": "Product 3",
+        "title": "title3",
+        "price": 12.99,
+        "description": "This is the description of Product 3.",
+        "url": "https://picsum.photos/200/200"
+    }
+]
 </script>
 
