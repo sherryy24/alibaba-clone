@@ -75,7 +75,7 @@
                 </li>
 
                 <li 
-                    v-if="user" 
+                    v-if="false" 
                     @click="signOut()"
                     class="
                         relative 
