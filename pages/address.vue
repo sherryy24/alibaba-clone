@@ -10,7 +10,7 @@
                     <TextInput 
                         class="w-full"
                         placeholder="Contact Name"
-                        v-model="contactName"
+                        v-model:input="contactName"
                         inputType="text"
                         :error="error && error.type == 'contactName' ? error.message : ''"
                     />
@@ -18,7 +18,7 @@
                     <TextInput 
                         class="w-full mt-2"
                         placeholder="Address"
-                        v-model="address"
+                        v-model:input="address"
                         inputType="text"
                         :error="error && error.type == 'address' ? error.message : ''"
                     />
@@ -26,7 +26,7 @@
                     <TextInput 
                         class="w-full mt-2"
                         placeholder="Zip Code"
-                        v-model="zipCode"
+                        v-model:input="zipCode"
                         inputType="text"
                         :error="error && error.type == 'zipCode' ? error.message : ''"
                     />
@@ -34,7 +34,7 @@
                     <TextInput 
                         class="w-full mt-2"
                         placeholder="City"
-                        v-model="city"
+                        v-model:input="city"
                         inputType="text"
                         :error="error && error.type == 'city' ? error.message : ''"
                     />
@@ -42,7 +42,7 @@
                     <TextInput 
                         class="w-full mt-2"
                         placeholder="Country"
-                        v-model="country"
+                        v-model:input="country"
                         inputType="text"
                         :error="error && error.type == 'country' ? error.message : ''"
                     />
@@ -82,7 +82,7 @@ import MainLayout from '~/layouts/MainLayout.vue'
 import { useUserStore } from '~/stores/user'
 
 const userStore = useUserStore();
-// const user = useSupabaseUser()
+const user = useSupabaseUser()
 let contactName = ref(null)
 let address = ref(null)
 let zipCode = ref(null)
