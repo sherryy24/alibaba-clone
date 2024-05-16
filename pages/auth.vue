@@ -6,6 +6,8 @@
             </NuxtLink>
         </div>
 
+        {{ user }}
+
         <div class="max-w-[400px] mx-auto px-2">
 
             <div class="text-center my-6">Login / Register</div>
@@ -56,19 +58,19 @@
 </template>
 
 <script setup>
-// const client = useSupabaseClient()
-// const user = useSupabaseUser()
+const client = useSupabaseClient()
+const user = useSupabaseUser()
 
-// watchEffect(()=>{
-//     if(user.value){
-//         return navigateTo('/')
-//     }
-// })
+watchEffect(()=>{
+    if(user.value){
+        return navigateTo('/')
+    }
+})
 
-const login =async () =>{
-    const {data, server} = await client.auth.signInWithOAuth({
-        provider : prov,
-        
-    })
+const login = async (prov) => {
+  const { data, error } = await client.auth.signInWithOAuth({
+    provider: prov,
+    redirectTo: window.location.origin
+  })
 }
 </script>
