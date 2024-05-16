@@ -1,7 +1,7 @@
 <template>
     <MainLayout>
         <div id="ShoppingCartPage" class="mt-4 max-w-[1200px] mx-auto px-2">
-            <div v-if="false"
+            <div v-if="!userStore.cart.length"
             class="h-[500px] flex items-center justify-center">
                 <div class="pt-20">
                     <img 
@@ -12,7 +12,7 @@
 
                     <div class="text-xl text-center mt-4">No items yet?</div>
 
-                    <div v-if="true" class="flex text-center">
+                    <div v-if="!user" class="flex text-center">
                         <NuxtLink 
                             to="/auth"
                             class="
@@ -37,7 +37,7 @@
                     <div class="bg-white rounded-lg p-4">
 
                         <div class="text-2xl font-bold mb-2">
-                            Shopping Cart (0)
+                            Shopping Cart ({{ userStore.cart.length }})
                         </div>
 
                     </div>
@@ -47,7 +47,7 @@
                     </div>
 
                     <div id="Items" class="bg-white rounded-lg p-4 mt-4">
-                        <div v-for="product in products" :key="product">
+                        <div v-for="product in userStore.cart" :key="product">
                             <CartItem 
                                 :product="product" 
                                 :selectedArray="selectedArray"
@@ -115,6 +115,7 @@ import MainLayout from '~/layouts/MainLayout.vue';
 import { useUserStore } from '~/stores/user'
 
 const userStore = useUserStore();
+const user = useSupabaseUser()
 
 let selectedArray = ref([])
 
@@ -168,31 +169,6 @@ const goToCheckout = ()=>{
 
     return navigateTo('/checkout')
 }
-const products = [
-    {
-        "id": 1,
-        "name": "Product 1",
-        "title": "title1",
-        "price": 10.99,
-        "description": "This is the description of Product 1.",
-        "url": "https://picsum.photos/200/200"
-    },
-    {
-        "id": 2,
-        "name": "Product 2",
-        "title": "title2",
-        "price": 11.99,
-        "description": "This is the description of Product 2.",
-        "url": "https://picsum.photos/200/200"
-    },
-    {
-        "id": 3,
-        "name": "Product 3",
-        "title": "title3",
-        "price": 12.99,
-        "description": "This is the description of Product 3.",
-        "url": "https://picsum.photos/200/200"
-    }
-]
+
 </script>
 
